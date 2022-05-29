@@ -1,0 +1,39 @@
+# src/commands/install-op.yaml
+
+description: install the 1password cli (`op`) on the current executor. Note - installs latest.  
+
+parameters:
+
+  os:
+    description: OS installation method. Currently supports Alpine and Ubuntu
+    type: enum
+    enum: ["Alpine", "Ubuntu"]
+
+steps:
+  - when:
+      name: Install op to alpine-based executor
+      condition:
+        equal: [ << parameters.os >>, "Alpine" ]
+      steps:
+        - run:
+            name: Install op to alpine-based executor
+            commands: |
+              sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
+              sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
+              sudo apk update && sudo apk add --no-cache 1password-cli && \
+  - when:
+      name: Install op to ubuntu-based executor
+      condition:
+        equal: [ << parameters.os >>, "Ubuntu" ]
+      steps:
+        - run:
+            name: Install op to ubuntu-based executor
+            commands: |
+              curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+              echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list
+              sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+              curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+              sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+              curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+              sudo apt update && sudo apt install 1password-cli
+              op --version

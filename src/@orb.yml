@@ -1,0 +1,14 @@
+---
+version: 2.1
+
+description: |
+  Orb for using 1password connect secrets automation server within your pipeline.  
+
+  Available options include:
+
+  - install-op: install op cli on current executor
+  - install-opw: install opw (for creating/updating secrets) on current executor
+  - env: inject standard op .env file, output to $BASH_ENV and source
+
+display:
+  source_url: "https://github.com/ThoughtWorks-DPS/orb-1password-connect"
