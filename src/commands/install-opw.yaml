@@ -1,0 +1,12 @@
+# src/commands/install-opw.yaml
+
+description: install the twpps 1password op-writer cli (`opw`) on the current executor. Note - installs latest.  
+
+steps:
+  - run:
+      name: install opw 
+      command: |
+        curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz
+        tar -xzf opw_Linux_x86_64.tar.gz
+        sudo mv opw /usr/local/bin/opw
+        opw --version
