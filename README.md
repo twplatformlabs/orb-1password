@@ -10,6 +10,7 @@
 </div>
 <br />
 
+
 See [orb registry](https://circleci.com/developer/orbs/orb/twdps/onepassword) for detailed usage examples
 
 Available options include:
