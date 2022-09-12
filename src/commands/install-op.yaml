@@ -8,6 +8,10 @@ parameters:
     description: OS installation method. Currently supports Alpine and Ubuntu
     type: enum
     enum: ["Alpine", "Ubuntu"]
+  shell:
+    description: Shell to allow overriding default of the job
+    type: string
+    default: /bin/bash/ -eo pipefail
 
 steps:
   - when:
@@ -17,6 +21,7 @@ steps:
       steps:
         - run:
             name: Install op to alpine-based executor
+            shell: << parameters.shell >>
             command: |
               sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
               sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
@@ -28,6 +33,7 @@ steps:
       steps:
         - run:
             name: Install op to ubuntu-based executor
+            shell: << parameters.shell >>
             command: |
               curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
               echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list

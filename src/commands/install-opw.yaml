@@ -2,9 +2,16 @@
 
 description: install the twpps 1password op-writer cli (`opw`) on the current executor. Note - installs latest.  
 
+parameters:
+
+  shell:
+    description: Shell to allow overriding default of the job
+    type: string
+    default: /bin/bash -eo pipefail
 steps:
   - run:
       name: install opw 
+      shell: << parameters.shell >>
       command: |
         curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz
         tar -xzf opw_Linux_x86_64.tar.gz
