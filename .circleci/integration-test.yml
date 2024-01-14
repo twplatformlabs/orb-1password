@@ -29,7 +29,7 @@ jobs:
       - run:
           name: install test dependencies
           command: |
-            apk add --no-cache sudo curl
+            apk add --no-cache sudo curl gnupg
       - op/packages:
           op-version: 2.24.0
           opw-version: 0.1.0
