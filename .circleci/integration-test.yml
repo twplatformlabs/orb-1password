@@ -58,6 +58,19 @@ jobs:
             op --version | grep "2.24.0"
             opw version | grep "0.1.0"
 
+  test op env:
+    docker:
+      - image: twdps/circleci-base-image:alpine-stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - op/env
+      - run:
+          name: test op env
+          command: |
+            set -exo pipefail
+            echo $GMAIL_ADDRESS | grep "twdps"
+
 workflows:
 
   integration tests:
