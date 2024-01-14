@@ -1,0 +1,46 @@
+# src/examples/orb-examples.yaml
+
+description: Standard workflow demonstrating orb features.
+
+usage:
+  version: 2.1
+
+  orbs:
+    executor-tools: twdps/onepassword@2.0.1
+
+  on-push-main: &on-push-main
+    branches:
+      only: /main/
+    tags:
+      ignore: /.*/
+
+  jobs:
+    test install on ubuntu machine executor:
+      machine:
+        image: ubuntu-2204:current
+      resource_class: medium
+      steps:
+        - checkout
+        - op/packages:
+            op-version: 2.24.0-1
+        - op/env:
+            name: setup ENV vars from op.env file
+        - op/write:
+            name: write private signing key to disk for use with cosign
+            op-value: empc-lab/cosign/private.key
+            out-file: private.key
+        - op/tpl:
+            name: injection secrets in to custom template
+            before-tpl:
+              - run:
+                  name: generate template file to tpl folder
+                  command: bash scripts/generate_template.sh
+            out-file: deployment.yaml
+          
+
+  workflows:
+    version: 2
+
+    workflow-example:
+      jobs:
+        - test install on ubuntu machine executor
