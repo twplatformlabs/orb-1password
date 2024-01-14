@@ -28,7 +28,25 @@ parameters:
     description: write secret to out-file name
     type: string
 
+  before-tpl:
+    description: Optional steps to run before template injection.
+    type: steps
+    default: []
+
+  after-tpl:
+    description: Optional steps to run before template injection.
+    type: steps
+    default: []
+
 steps:
+  - when:
+      name: Run before-tpl lifecycle hook steps.
+      condition: << parameters.before-tpl >>
+      steps: << parameters.before-tpl >>
   - run:
       name: op inject << parameters.out-file >>.tpl
       command: op inject -i << parameters.tpl-path >>/<< parameters.out-file >><< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.out-file >>
+  - when:
+      name: Run after-tpl lifecycle hook steps.
+      condition: << parameters.after-tpl >>
+      steps: << parameters.after-tpl >>

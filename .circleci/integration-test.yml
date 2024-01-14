@@ -81,6 +81,12 @@ jobs:
       - op/tpl:
           tpl-path: test
           out-file: email.txt
+          before-tpl:
+            - echo-message:
+                msg: "before template"
+          after-tpl:
+            - echo-message:
+                msg: "after template"
       - run:
           name: test op tpl
           command: |
