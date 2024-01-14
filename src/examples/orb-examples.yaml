@@ -1,5 +1,5 @@
 # src/examples/orb-examples.yaml
-
+---
 description: Standard workflow demonstrating orb features.
 
 usage:
@@ -36,7 +36,6 @@ usage:
                   name: generate template file to tpl folder
                   command: bash scripts/generate_template.sh
             out-file: deployment.yaml
-          
 
   workflows:
     version: 2
