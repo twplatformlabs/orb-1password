@@ -2,7 +2,7 @@
 version: 2.1
 
 orbs:
-  op: twdps/onepasword@dev:<<pipeline.git.revision>>
+  op: twdps/onepassword@dev:<<pipeline.git.revision>>
 
 globals:
   - &context orb-publishing
