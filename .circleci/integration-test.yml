@@ -78,6 +78,14 @@ jobs:
           command: |
             set -exo pipefail
             cat write_test.txt | grep "twdps"
+      - op/tpl:
+          tpl-path: test
+          out-file: email.txt
+      - run:
+          name: test op tpl
+          command: |
+            set -exo pipefail
+            cat email.txt | grep "twdps"
 
 workflows:
 

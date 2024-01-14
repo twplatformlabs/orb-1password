@@ -1,0 +1,34 @@
+# src/commands/write.yaml
+# yamllint disable rule:line-length
+---
+description: |
+  Use out-file.tpl to perform op template injecto tion substitution to out-file.
+
+  Create your template file using the out-file name plus .tpl extension. Command
+  will do op injection and write 
+
+parameters:
+
+  tpl-path:
+    description: path to out-file.tpl file
+    type: string
+    default: tpl
+
+  tpl-ext:
+    description: template filename extention
+    type: string
+    default: .tpl
+
+  out-path:
+    description: path to out-file write location
+    type: string
+    default: .
+
+  out-file:
+    description: write secret to out-file name
+    type: string
+
+steps:
+  - run:
+      name: op inject << parameters.out-file >>.tpl
+      command: op inject -i << parameters.tpl-path >>/<< parameters.out-file >><< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.out-file >>
