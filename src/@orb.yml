@@ -2,7 +2,7 @@
 version: 2.1
 
 description: |
-  Orb for using 1password secrets automation within your pipeline.  
+  Orb for using 1password secrets automation within your pipeline.
 
   Available commands include:
 

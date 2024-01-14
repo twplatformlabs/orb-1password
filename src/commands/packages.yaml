@@ -28,7 +28,7 @@ steps:
         - when:
             name: Install op to Ubuntu-based executor
             condition:
-              equal: [ << parameters.os >>, "Ubuntu" ]
+              equal: [<< parameters.os >>, "Ubuntu"]
             steps:
               - run:
                   name: install op to Alpine-based executor
@@ -44,7 +44,7 @@ steps:
         - when:
             name: Install op to Alpine-based executor
             condition:
-              equal: [ << parameters.os >>, "Alpine" ]
+              equal: [<< parameters.os >>, "Alpine"]
             steps:
               - run:
                   name: Install op to Alpine-based executor
