@@ -30,6 +30,10 @@ jobs:
           name: install test dependencies
           command: |
             apk add --no-cache sudo curl gnupg
+            sudo -u circleci mkdir /home/circleci/.gnupg
+            sudo -u circleci bash -c "echo 'allow-loopback-pinentry' > /home/root/.gnupg/gpg-agent.conf"
+            sudo -u circleci bash -c "echo 'pinentry-mode loopback' > /home/root/.gnupg/gpg.conf"
+            chmod 700 /home/root/.gnupg && chmod 600 /home/root/.gnupg/*
       - op/packages:
           op-version: 2.24.0
           opw-version: 0.1.0
