@@ -1,0 +1,54 @@
+# src/commands/packages.yaml
+# yamllint disable rule:line-length
+---
+description: |
+  Manage the installation of 1password-cli and the opw write utility for connect server users.
+
+parameters:
+
+  os:
+    description: OS installation method. Currently supports Alpine and Ubuntu
+    type: enum
+    enum: ["Alpine", "Ubuntu"]
+    default: Ubuntu
+
+  op-version:
+    description: 1password-cli version
+    type: string
+
+  opw-version:
+    description: opw version
+    type: string
+
+steps:
+  - when:
+      name: Install op to Alpine-based executor
+      condition: << parameters.op-version >>
+      steps:
+        - when:
+            name: Install op to Ubuntu-based executor
+            condition:
+              equal: [ << parameters.os >>, "Ubuntu" ]
+            steps:
+              - run:
+                  name: install op to Alpine-based executor
+                  command: |
+                    curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+                    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list
+                    sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+                    curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+                    sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+                    curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+                    sudo apt update && sudo apt install 1password-cli=<< parameters.op-version >>
+                    op --version
+        - when:
+            name: Install op to Alpine-based executor
+            condition:
+              equal: [ << parameters.os >>, "Alpine" ]
+            steps:
+              - run:
+                  name: Install op to Alpine-based executor
+                  command: |
+                    sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
+                    sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
+                    sudo apk update && sudo apk add --no-cache 1password-cli===<< parameters.op-version >>

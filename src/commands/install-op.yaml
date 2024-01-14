@@ -8,6 +8,8 @@ parameters:
     description: OS installation method. Currently supports Alpine and Ubuntu
     type: enum
     enum: ["Alpine", "Ubuntu"]
+    default: Ubuntu
+
   shell:
     description: Shell to allow overriding default of the job
     type: string
@@ -43,3 +45,9 @@ steps:
               curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
               sudo apt update && sudo apt install 1password-cli
               op --version
+
+
+
+    # curl -L https://cache.agilebits.com/dist/1P/op2/pkg/v${ONEPASSWORD_VERSION}/op_linux_amd64_v${ONEPASSWORD_VERSION}.zip -o op.zip && \
+    # unzip op.zip && sudo mv op /usr/local/bin/op && \
+    # rm op.zip && rm op.sig && \
