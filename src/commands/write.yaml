@@ -1,0 +1,24 @@
+# src/commands/write.yaml
+# yamllint disable rule:line-length
+---
+description: |
+  Writes op-value from 1password to out-file.
+
+  provide op-value format = vault/item/field. 
+
+parameters:
+
+  op-value:
+    description: 1pass word vault value field reference
+    type: string
+
+  out-file:
+    description: write secret to out-file name
+    type: string
+
+steps:
+  - run:
+      name: write temporary tempplate file
+      command: echo "op://<< parameters.op-reference >>" > << parameters.out-file >>.tpl
+  - run:
+      name: op inject -i << parameters.out-file >>.tpl -o << parameters.out-file >>.tpl

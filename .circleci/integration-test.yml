@@ -58,7 +58,7 @@ jobs:
             op --version | grep "2.24.0"
             opw version | grep "0.1.0"
 
-  test op env:
+  test op commands:
     docker:
       - image: twdps/circleci-base-image:alpine-stable
     steps:
@@ -70,6 +70,14 @@ jobs:
           command: |
             set -exo pipefail
             echo $GMAIL_ADDRESS | grep "twdps"
+      - op/write:
+          op-value: empc-lab/svc-gmail/username
+          out-file: write_test.txt
+      - run:
+          name: test op write
+          command: |
+            set -exo pipefail
+            cat write_test.txt | grep "twdps"
 
 workflows:
 
@@ -77,5 +85,5 @@ workflows:
     jobs:
       - test install on alpine executor
       - test install on ubuntu machine executor
-      - test op env:
+      - test op commands:
           context: *context
