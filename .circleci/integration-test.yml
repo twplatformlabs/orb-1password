@@ -26,9 +26,19 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: install test dependencies
+          command: |
+            apk add --no-cache sudo curl
       - op/packages:
           op-version: 2.24.0
           opw-version: 0.1.0
+      - run:
+          name: confirm installed version for available packages
+          command: |
+            set -exo pipefail
+            op --version | grep "2.24.0"
+            opw version | grep "0.1.0"
 
 
   test install on ubuntu machine executor:
@@ -45,7 +55,7 @@ jobs:
           command: |
             set -exo pipefail
             op --version | grep "2.24.0"
-            opw --version | grep "0.1.0"
+            opw version | grep "0.1.0"
 
 workflows:
 
