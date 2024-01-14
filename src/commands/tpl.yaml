@@ -5,7 +5,7 @@ description: |
   Use out-file.tpl to perform op template injecto tion substitution to out-file.
 
   Create your template file using the out-file name plus .tpl extension. Command
-  will do op injection and write 
+  will do op injection and write.
 
 parameters:
 
