@@ -77,3 +77,4 @@ workflows:
     jobs:
       - test install on alpine executor
       - test install on ubuntu machine executor
+      - test op env
