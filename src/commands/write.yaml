@@ -22,4 +22,4 @@ steps:
       command: echo "op://<< parameters.op-value >>" > << parameters.out-file >>.tpl
   - run:
       name: op inject template to out-file
-      command: op inject -i << parameters.out-file >>.tpl -o << parameters.out-file >>.tpl
+      command: op inject -i << parameters.out-file >>.tpl -o << parameters.out-file >>
