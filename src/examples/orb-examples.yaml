@@ -6,7 +6,7 @@ usage:
   version: 2.1
 
   orbs:
-    executor-tools: twdps/onepassword@2.0.1
+    op: twdps/onepassword@2.0.2
 
   on-push-main: &on-push-main
     branches:

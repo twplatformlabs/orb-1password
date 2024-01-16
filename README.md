@@ -11,3 +11,5 @@
 <br />
 
 Orb for using 1password cloud and connect servers in pipelines. See [orb registry](https://circleci.com/developer/orbs/orb/twdps/onepassword) for detailed usage examples.
+
+NOTE: v2.x.x is a breaking change. Review documentation in detail before upgrading.
