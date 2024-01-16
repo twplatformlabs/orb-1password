@@ -19,6 +19,7 @@ parameters:
   opw-version:
     description: opw version
     type: string
+    default: ""
 
 steps:
   - when:
