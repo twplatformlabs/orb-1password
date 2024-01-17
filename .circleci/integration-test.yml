@@ -64,7 +64,8 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - op/env
+      - op/env:
+          env-file: test/op.env
       - run:
           name: test op env
           command: |
