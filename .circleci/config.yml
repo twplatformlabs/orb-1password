@@ -85,7 +85,7 @@ workflows:
           context: *context
           channel: lab-events
           message: "New twdps/onepassword orb release"
-          include_tag: true
+          include-tag: true
           filters: *on-tag-main
           before-message:
             - op/env
