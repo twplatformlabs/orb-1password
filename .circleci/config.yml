@@ -84,7 +84,7 @@ workflows:
       - do/slack:
           context: *context
           channel: lab-events
-          message: "New twdps/onepassword orb release $CIRCLE_TAG"
+          message: New twdps/onepassword orb release ${CIRCLE_TAG}
           filters: *on-tag-main
           before-message:
             - op/env
