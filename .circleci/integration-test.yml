@@ -60,15 +60,13 @@ jobs:
       - checkout
       - setup_remote_docker
       - op/env:
-          name: set ENV using op/env
-          env-file: test/op.env
+          env-file: test op/env
       - run:
           name: test op/env
           command: |
             set -exo pipefail
             echo $GMAIL_ADDRESS | grep "twdps"
       - op/write-to-disk:
-          name: write vault value to disk using op/write-to-disk
           op-value: empc-lab/svc-gmail/username
           out-file: write_test.txt
       - run:
@@ -77,7 +75,6 @@ jobs:
             set -exo pipefail
             cat write_test.txt | grep "twdps"
       - op/tpl:
-          name: populate template using default op/tpl
           tpl-file: default_email.txt
           before-tpl:
             - echo-message:
@@ -91,14 +88,13 @@ jobs:
             set -exo pipefail
             cat default_email.txt | grep "twdps"
       - op/tpl:
-          name: populate template with op/tpl using override parameters 
           tpl-path: test
           tpl-file: email.txt
           tpl-ext: template
           out-path: .
           out-file: named_email.txt
       - run:
-          name: test parameter override op/tpl
+          name: test op/tpl with parameter overrides
           command: |
             set -exo pipefail
             cat named_email.txt | grep "twdps"
