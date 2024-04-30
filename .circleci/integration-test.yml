@@ -31,12 +31,18 @@ jobs:
           command: |
             apk add --no-cache sudo bash wget curl
       - op/install:
-          op-version: 2.26.1-1
+          op-version: 2.26.1
       - run:
-          name: confirm installed version for available packages
+          name: test version install
           command: |
             set -exo pipefail
             op --version | grep " 2.26.1"
+      - op/install
+      - run:
+          name: test latest install
+          command: |
+            set -exo pipefail
+            op --help | grep "1Password"
 
 
   test install on ubuntu machine executor:
@@ -45,13 +51,12 @@ jobs:
     resource_class: medium
     steps:
       - checkout
-      - op/install:
-          op-version: 2.26.1-1
+      - op/install
       - run:
-          name: confirm installed version for available packages
+          name: test latest install
           command: |
             set -exo pipefail
-            op --version | grep "2.26.1"
+            op --help | grep "1Password"
 
   test op commands:
     docker:
