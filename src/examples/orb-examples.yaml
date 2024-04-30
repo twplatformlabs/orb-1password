@@ -26,11 +26,11 @@ usage:
         - op/env:
             name: setup ENV vars from op.env file
         - op/write-to-file:
-            name: write private signing key to disk for use with cosign
+            name: write public signing key to disk for use with cosign
             op-value: empc-lab/cosign/public.key
             out-file: public.key
         - op/tpl:
-            name: injection secrets in to custom template
+            name: inject secrets into custom template
             before-tpl:
               - run:
                   name: generate template file to tpl folder
