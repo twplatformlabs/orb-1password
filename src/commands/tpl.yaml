@@ -2,10 +2,12 @@
 # yamllint disable rule:line-length
 ---
 description: |
-  Populate template file with specified contents from 1password and write to out-file. 
+  Populate template file with specified contents from 1password and write to out-file.
 
-  By default assumes template found at tpl/<out-file>.tpl but you may override the
-  template folder and tpl-file name.
+  By default assumes template found at tpl/<tpl-file>.tpl and writes to <tpl-file> however
+  you may override the template folder and out-file name.
+
+  customer before-tpl and after-tpl steps may be passed.
 
 parameters:
 
@@ -55,7 +57,7 @@ steps:
         - run: op inject -i << parameters.tpl-path >>/<< parameters.out-file >><< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.out-file >>
   - when:
       name: inject and write template << parameters.tpl-path >>/<< parameters.tpl-file >><< parameters.tpl-ext >> to << parameters.out-path >>/<< parameters.out-file >>
-      condition:  << parameters.tpl-file >>
+      condition: << parameters.tpl-file >>
       steps:
         - run: op inject -i << parameters.tpl-path >>/<< parameters.out-file >><< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.out-file >>
   - when:
