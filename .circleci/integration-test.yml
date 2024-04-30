@@ -66,11 +66,11 @@ jobs:
           command: |
             set -exo pipefail
             echo $GMAIL_ADDRESS | grep "twdps"
-      - op/write-to-disk:
+      - op/write-to-file:
           op-value: empc-lab/svc-gmail/username
           out-file: write_test.txt
       - run:
-          name: test op/write-to-disk
+          name: test op/write-to-file
           command: |
             set -exo pipefail
             cat write_test.txt | grep "twdps"
