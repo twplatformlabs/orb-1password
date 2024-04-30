@@ -36,7 +36,7 @@ jobs:
           name: test version install
           command: |
             set -exo pipefail
-            op --version | grep " 2.26.1"
+            op --version | grep "2.26.1"
       - op/install
       - run:
           name: test latest install

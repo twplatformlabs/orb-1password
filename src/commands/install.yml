@@ -15,7 +15,7 @@ parameters:
 
 steps:
   - run:
-      name: install op v<< parameters.op-version >>
+      name: install op << parameters.op-version >>
       environment:
         OP_CLI_VERSION: << parameters.op-version >>
       command: <<include(scripts/install_cli.sh)>>

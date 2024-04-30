@@ -21,7 +21,7 @@ parameters:
   tpl-ext:
     description: template filename extention
     type: string
-    default: .tpl
+    default: tpl
 
   out-path:
     description: path to out-file write location
@@ -49,15 +49,15 @@ steps:
       condition: << parameters.before-tpl >>
       steps: << parameters.before-tpl >>
   - unless:
-      name: inject and write template << parameters.tpl-path >>/<< parameters.tpl-file >><< parameters.tpl-ext >> to << parameters.out-path >>/<< parameters.tpl-file >>
+      name: inject and write template << parameters.tpl-path >>/<< parameters.tpl-file >>.<< parameters.tpl-ext >> to << parameters.out-path >>/<< parameters.tpl-file >>
       condition: << parameters.out-file >>
       steps:
-        - run: op inject -i << parameters.tpl-path >>/<< parameters.tpl-file >><< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.tpl-file >>
+        - run: op inject -i << parameters.tpl-path >>/<< parameters.tpl-file >>.<< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.tpl-file >>
   - when:
-      name: inject and write template << parameters.tpl-path >>/<< parameters.tpl-file >><< parameters.tpl-ext >> to << parameters.out-path >>/<< parameters.out-file >>
+      name: inject and write template << parameters.tpl-path >>/<< parameters.tpl-file >>.<< parameters.tpl-ext >> to << parameters.out-path >>/<< parameters.out-file >>
       condition: << parameters.out-file >>
       steps:
-        - run: op inject -i << parameters.tpl-path >>/<< parameters.tpl-file >><< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.out-file >>
+        - run: op inject -i << parameters.tpl-path >>/<< parameters.tpl-file >>.<< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.out-file >>
   - when:
       name: Run after-tpl lifecycle hook steps.
       condition: << parameters.after-tpl >>
