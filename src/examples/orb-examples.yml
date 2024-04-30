@@ -22,24 +22,21 @@ usage:
       steps:
         - checkout
         - op/install:
-            op-version: 2.26.1-1
-        - op/env:
-            name: setup ENV vars from op.env file
+            op-version: 2.27.0
+        - op/env
         - op/write-to-file:
-            name: write public signing key to disk for use with cosign
-            op-value: empc-lab/cosign/public.key
-            out-file: public.key
+            op-value: my-vault/item/field-name
+            out-file: field-name.key
         - op/tpl:
-            name: inject secrets into custom template
             before-tpl:
               - run:
-                  name: generate template file to tpl folder
-                  command: bash scripts/generate_template.sh
-            out-file: deployment.yaml
+                  name: optionally, use a script to generate the template file
+                  command: bash scripts/generate_template.sh > my-template.yaml.tpl
+            tpl-file: my-template.yaml
 
   workflows:
     version: 2
 
     workflow-example:
       jobs:
-        - test install on ubuntu machine executor
+        - example commands on ubuntu machine executor
