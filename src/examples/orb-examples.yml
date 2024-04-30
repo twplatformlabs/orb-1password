@@ -1,4 +1,5 @@
 # src/examples/orb-examples.yaml
+# yamllint disable rule:line-length
 ---
 description: Standard workflow demonstrating orb features.
 
