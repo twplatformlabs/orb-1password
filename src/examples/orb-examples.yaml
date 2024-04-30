@@ -6,7 +6,7 @@ usage:
   version: 2.1
 
   orbs:
-    op: twdps/onepassword@2.0.2
+    op: twdps/onepassword@3.0.0
 
   on-push-main: &on-push-main
     branches:
@@ -21,14 +21,14 @@ usage:
       resource_class: medium
       steps:
         - checkout
-        - op/packages:
-            op-version: 2.24.0-1
+        - op/install:
+            op-version: 2.26.1-1
         - op/env:
             name: setup ENV vars from op.env file
-        - op/write:
+        - op/write-to-file:
             name: write private signing key to disk for use with cosign
-            op-value: empc-lab/cosign/private.key
-            out-file: private.key
+            op-value: empc-lab/cosign/public.key
+            out-file: public.key
         - op/tpl:
             name: injection secrets in to custom template
             before-tpl:

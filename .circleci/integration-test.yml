@@ -32,13 +32,13 @@ jobs:
             apk add --no-cache sudo bash wget curl
       - op/packages:
           os: Alpine
-          op-version: 2.24.0-r1
+          op-version: 2.26.1-1
           opw-version: 0.1.0
       - run:
           name: confirm installed version for available packages
           command: |
             set -exo pipefail
-            op --version | grep "2.24.0"
+            op --version | grep " 2.26.1"
             opw version | grep "0.1.0"
 
 

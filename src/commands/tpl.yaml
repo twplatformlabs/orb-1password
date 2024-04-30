@@ -2,10 +2,10 @@
 # yamllint disable rule:line-length
 ---
 description: |
-  Use out-file.tpl to perform op template injecto tion substitution to out-file.
+  Populate template file with specified contents from 1password and write to out-file. 
 
-  Create your template file using the out-file name plus .tpl extension. Command
-  will do op injection and write.
+  By default assumes template found at tpl/<out-file>.tpl but you may override the
+  template folder and tpl-file name.
 
 parameters:
 
@@ -13,6 +13,11 @@ parameters:
     description: path to out-file.tpl file
     type: string
     default: tpl
+
+  tpl-file:
+    description: template filename
+    type: string
+    default: ""
 
   tpl-ext:
     description: template filename extention
@@ -43,9 +48,16 @@ steps:
       name: Run before-tpl lifecycle hook steps.
       condition: << parameters.before-tpl >>
       steps: << parameters.before-tpl >>
-  - run:
-      name: op inject << parameters.out-file >>.tpl
-      command: op inject -i << parameters.tpl-path >>/<< parameters.out-file >><< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.out-file >>
+  - unless:
+      name: inject and write template << parameters.tpl-path >>/<< parameters.out-file >><< parameters.tpl-ext >> to << parameters.out-path >>/<< parameters.out-file >>
+      condition: << parameters.tpl-file >>
+      steps:
+        - run: op inject -i << parameters.tpl-path >>/<< parameters.out-file >><< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.out-file >>
+  - when:
+      name: inject and write template << parameters.tpl-path >>/<< parameters.tpl-file >><< parameters.tpl-ext >> to << parameters.out-path >>/<< parameters.out-file >>
+      condition:  << parameters.tpl-file >>
+      steps:
+        - run: op inject -i << parameters.tpl-path >>/<< parameters.out-file >><< parameters.tpl-ext >> -o << parameters.out-path >>/<< parameters.out-file >>
   - when:
       name: Run after-tpl lifecycle hook steps.
       condition: << parameters.after-tpl >>

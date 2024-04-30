@@ -1,13 +1,13 @@
-# src/commands/packages.yaml
+# src/commands/install.yaml
 # yamllint disable rule:line-length
 ---
 description: |
-  Manage the installation of 1password-cli and the opw write utility for connect server users.
+  Manage the installation of 1password-cli on Debia n-based and Alpine linux distributions.
 
 parameters:
 
   os:
-    description: OS installation method. Currently supports Alpine and Ubuntu
+    description: OS installation method. Currently supports Alpine and Ubuntu.
     type: enum
     enum: ["Alpine", "Ubuntu"]
     default: Ubuntu
@@ -15,11 +15,6 @@ parameters:
   op-version:
     description: 1password-cli version
     type: string
-
-  opw-version:
-    description: opw version
-    type: string
-    default: ""
 
 steps:
   - when:
@@ -53,16 +48,3 @@ steps:
                     sudo bash -c "echo https://downloads.1password.com/linux/alpinelinux/stable/ >> /etc/apk/repositories" && \
                     sudo bash -c "wget https://downloads.1password.com/linux/keys/alpinelinux/support@1password.com-61ddfc31.rsa.pub -P /etc/apk/keys" && \
                     sudo apk update && sudo apk add --no-cache 1password-cli==<< parameters.op-version >>
-  - when:
-      name: install opw on linux
-      condition: << parameters.opw-version >>
-      steps:
-        - run:
-            name: install opw on linux
-            command: |
-              echo "Warning DEPRECATED: opw (1password connect server writer) not required for Service Account connections"
-              echo "Latest version will be the final release version and is provided for backward compatibility with 1connect server users"
-              curl -SLO https://github.com/ThoughtWorks-DPS/opw/releases/latest/download/opw_Linux_x86_64.tar.gz
-              tar -xzf opw_Linux_x86_64.tar.gz opw
-              sudo mv opw /usr/local/bin/opw
-              opw version

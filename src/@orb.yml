@@ -8,13 +8,13 @@ description: |
 
   Available commands include:
 
-  - packages: install op cli and/or opw
+  - install: install 1password CLI
   - env: set shell ENV variables from an environment file (e.g., op.env)
-  - write: write secret from op to named file
   - tpl: op inject template file to output file
+  - write-to-file: write secret from op to named file
 
 
-  NOTE: v2.x.x is a breaking change. See detailed documentation before upgrading.
+  NOTE: v3.x.x is a breaking change. See detailed documentation before upgrading.
 
 display:
   source_url: "https://github.com/ThoughtWorks-DPS/orb-1password-connect"

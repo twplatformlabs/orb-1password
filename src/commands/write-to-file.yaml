@@ -1,4 +1,4 @@
-# src/commands/write.yaml
+# src/commands/write-to-file.yaml
 # yamllint disable rule:line-length
 ---
 description: |
