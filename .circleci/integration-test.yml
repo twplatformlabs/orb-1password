@@ -30,16 +30,13 @@ jobs:
           name: install test dependencies
           command: |
             apk add --no-cache sudo bash wget curl
-      - op/packages:
-          os: Alpine
+      - op/install:
           op-version: 2.26.1-1
-          opw-version: 0.1.0
       - run:
           name: confirm installed version for available packages
           command: |
             set -exo pipefail
             op --version | grep " 2.26.1"
-            opw version | grep "0.1.0"
 
 
   test install on ubuntu machine executor:
@@ -48,15 +45,13 @@ jobs:
     resource_class: medium
     steps:
       - checkout
-      - op/packages:
+      - op/install:
           op-version: 2.26.1-1
-          opw-version: 0.1.0
       - run:
           name: confirm installed version for available packages
           command: |
             set -exo pipefail
             op --version | grep "2.26.1"
-            opw version | grep "0.1.0"
 
   test op commands:
     docker:
@@ -65,34 +60,48 @@ jobs:
       - checkout
       - setup_remote_docker
       - op/env:
+          name: set ENV using op/env
           env-file: test/op.env
       - run:
-          name: test op env
+          name: test op/env
           command: |
             set -exo pipefail
             echo $GMAIL_ADDRESS | grep "twdps"
-      - op/write:
+      - op/write-to-disk:
+          name: write vault value to disk using op/write-to-disk
           op-value: empc-lab/svc-gmail/username
           out-file: write_test.txt
       - run:
-          name: test op write
+          name: test op/write-to-disk
           command: |
             set -exo pipefail
             cat write_test.txt | grep "twdps"
       - op/tpl:
-          tpl-path: test
-          out-file: email.txt
+          name: populate template using default op/tpl
+          tpl-file: default_email.txt
           before-tpl:
             - echo-message:
-                msg: "before template"
+                msg: "custom step before template"
           after-tpl:
             - echo-message:
-                msg: "after template"
+                msg: "custom step fter template"
       - run:
-          name: test op tpl
+          name: test default op/tpl
           command: |
             set -exo pipefail
-            cat email.txt | grep "twdps"
+            cat default_email.txt | grep "twdps"
+      - op/tpl:
+          name: populate template with op/tpl using override parameters 
+          tpl-path: test
+          tpl-file: email.txt
+          tpl-ext: template
+          out-path: .
+          out-file: named_email.txt
+      - run:
+          name: test parameter override op/tpl
+          command: |
+            set -exo pipefail
+            cat named_email.txt | grep "twdps"
 
 workflows:
 
