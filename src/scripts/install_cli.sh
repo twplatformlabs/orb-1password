@@ -26,6 +26,8 @@ else
     OP_CLI_VERSION="v$OP_CLI_VERSION"
 fi
 
+echo $OP_CLI_VERSION
+
 # install linux/intel arch
 curl -sSfLo op.zip "https://cache.agilebits.com/dist/1P/op2/pkg/${OP_CLI_VERSION}/op_linux_amd64_${OP_CLI_VERSION}.zip"
 sudo unzip -od "/usr/local/bin/" op.zip && rm op.zip
