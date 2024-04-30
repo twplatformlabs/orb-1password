@@ -10,7 +10,7 @@ description: |
 
   - install: install 1password CLI
   - env: set shell ENV variables from an environment file (e.g., op.env)
-  - tpl: op inject template file to output file
+  - tpl: inject values into template file and write to output file
   - write-to-file: write secret from op to named file
 
 

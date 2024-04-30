@@ -9,11 +9,11 @@ description: |
 parameters:
 
   op-value:
-    description: 1pass word vault value field reference
+    description: E.g., vault-name/item-name/field-name
     type: string
 
   out-file:
-    description: write secret to out-file name
+    description: output filename
     type: string
 
 steps:

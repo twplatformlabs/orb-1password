@@ -2,14 +2,12 @@
 # yamllint disable rule:line-length
 ---
 description: |
-  Install 1password-cli on linux/intel arch.
-
-  Supports version number, latest, and latest-beta.
+  Install 1password-cli for linux/intel arch.
 
 parameters:
 
   op-version:
-    description: 1password-cli version
+    description: can specify version number, latest, and latest-beta
     type: string
     default: latest
 

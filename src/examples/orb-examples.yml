@@ -25,13 +25,13 @@ usage:
             op-version: 2.27.0
         - op/env
         - op/write-to-file:
-            op-value: my-vault/item/field-name
-            out-file: field-name.key
+            op-value: my-vault/item/public.key
+            out-file: public.key
         - op/tpl:
             before-tpl:
               - run:
                   name: optionally, use a script to generate the template file
-                  command: bash scripts/generate_template.sh > my-template.yaml.tpl
+                  command: bash scripts/generate_template.sh > tpl/my-template.yaml.tpl
             tpl-file: my-template.yaml
 
   workflows:

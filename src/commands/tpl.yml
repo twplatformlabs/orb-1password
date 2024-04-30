@@ -1,35 +1,42 @@
-# src/commands/write.yaml
+# src/commands/tpl.yaml
 # yamllint disable rule:line-length
 ---
 description: |
-  Populate template file with specified contents from 1password and write to out-file.
+  Populate template file with values from 1password vault and write to out-file.
 
-  By default assumes template found at tpl/<tpl-file>.tpl and writes to <tpl-file> and
-  custom before-tpl and after-tpl steps may be passed. See paramters for overrides.
+  Must provide the template filename. By default, the command will look in the
+  tpl/ folder and use the tpl-file without the tpl-ext as the out-file name. you
+  may override all of these defaults.
+
+  For example, if you provide a tpl-file parameter of "myfile.yaml" the command will
+  attempt to read "./tpl/myfile.yaml.tpl" and then write the result to "./myfile.yaml"
+
+  See template file format documentation at:
+  https://developer.1password.com/docs/cli/secrets-template-syntax/
 
 parameters:
 
   tpl-path:
-    description: path to out-file.tpl file
+    description: path to template file
     type: string
     default: tpl
 
   tpl-file:
-    description: template filename
+    description: template file name
     type: string
 
   tpl-ext:
-    description: template filename extention
+    description: template file extention
     type: string
     default: tpl
 
   out-path:
-    description: path to out-file write location
+    description: path to write location
     type: string
     default: .
 
   out-file:
-    description: write secret to out-file name
+    description: output file name
     type: string
     default: ""
 
