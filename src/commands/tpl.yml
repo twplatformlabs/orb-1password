@@ -4,10 +4,8 @@
 description: |
   Populate template file with specified contents from 1password and write to out-file.
 
-  By default assumes template found at tpl/<tpl-file>.tpl and writes to <tpl-file> however
-  you may override the template folder and out-file name.
-
-  customer before-tpl and after-tpl steps may be passed.
+  By default assumes template found at tpl/<tpl-file>.tpl and writes to <tpl-file> and
+  custom before-tpl and after-tpl steps may be passed. See paramters for overrides.
 
 parameters:
 
