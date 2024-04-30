@@ -12,7 +12,10 @@
 
 Orb for using 1password cloud and connect servers in pipelines. See [orb registry](https://circleci.com/developer/orbs/orb/twdps/onepassword) for detailed usage examples.
 
-NOTE: v3.x.x is a breaking change. Review documentation in detail before upgrading.
-* Support for the opw (op writer) CLI has been removed
-* `package` command renamed to `install`
-* `write` command renamed to `write-to-file`
+NOTE: Breaking changes in v3.x.x  
+* Support for the opw (op writer) CLI has been removed  
+* `package` command renamed to `install`, and os parameter removed  
+* `tpl` reworked, different defaults and options  
+* `write` command renamed to `write-to-file`  
+
+Review documentation in detail before upgrading.
