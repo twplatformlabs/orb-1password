@@ -4,7 +4,7 @@
 description: |
   Writes op-value from 1password to out-file.
 
-  op-value format = vault/item/field.
+  op-value format is vault/item/field.
 
 parameters:
 

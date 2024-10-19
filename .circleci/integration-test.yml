@@ -31,12 +31,12 @@ jobs:
           command: |
             apk add --no-cache sudo bash wget curl
       - op/install:
-          op-version: 2.26.1
+          op-version: 2.28.0
       - run:
           name: test version install
           command: |
             set -exo pipefail
-            op --version | grep "2.26.1"
+            op --version | grep "2.28.0"
       - op/install
       - run:
           name: test latest install

@@ -16,19 +16,19 @@ usage:
       ignore: /.*/
 
   jobs:
-    test install on ubuntu machine executor:
+    example on ubuntu machine executor:
       machine:
         image: ubuntu-2204:current
       resource_class: medium
       steps:
         - checkout
-        - op/install:
-            op-version: 2.27.0
-        - op/env
-        - op/write-to-file:
+        - op/install:                              # install op cli on machine executor
+            op-version: 2.30.0
+        - op/env                                   # add values from default op.env file to $BASH_ENV
+        - op/write-to-file:                        # write public certificate to local file
             op-value: my-vault/item/public.key
             out-file: public.key
-        - op/tpl:
+        - op/tpl:                                  # populate values in template from vault and write to local file
             before-tpl:
               - run:
                   name: optionally, use a script to generate the template file
@@ -40,4 +40,4 @@ usage:
 
     workflow-example:
       jobs:
-        - example commands on ubuntu machine executor
+        - example on ubuntu machine executor
