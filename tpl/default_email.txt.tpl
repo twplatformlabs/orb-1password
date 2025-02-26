@@ -1,1 +1,1 @@
-email: op://empc-lab/svc-gmail/username
+email: op://platform/svc-gmail/username
