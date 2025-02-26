@@ -70,7 +70,7 @@ jobs:
           name: test op/env
           command: |
             set -exo pipefail
-            echo $GMAIL_ADDRESS | grep "twdps"
+            echo $GMAIL_ADDRESS | grep "twplatformlabs"
       - op/write-to-file:
           op-value: empc-lab/svc-gmail/username
           out-file: write_test.txt
