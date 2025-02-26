@@ -72,13 +72,13 @@ jobs:
             set -exo pipefail
             echo $GMAIL_ADDRESS | grep "twplatformlabs"
       - op/write-to-file:
-          op-value: empc-lab/svc-gmail/username
+          op-value: platform/svc-gmail/username
           out-file: write_test.txt
       - run:
           name: test op/write-to-file
           command: |
             set -exo pipefail
-            cat write_test.txt | grep "twdps"
+            cat write_test.txt | grep "twplatformlabs"
       - op/tpl:
           tpl-file: default_email.txt
           before-tpl:
@@ -91,7 +91,7 @@ jobs:
           name: test default op/tpl
           command: |
             set -exo pipefail
-            cat default_email.txt | grep "twdps"
+            cat default_email.txt | grep "twplatformlabs"
       - op/tpl:
           tpl-path: test
           tpl-file: email.txt
@@ -102,7 +102,7 @@ jobs:
           name: test op/tpl with parameter overrides
           command: |
             set -exo pipefail
-            cat named_email.txt | grep "twdps"
+            cat named_email.txt | grep "twplatformlabs"
 
 workflows:
 
